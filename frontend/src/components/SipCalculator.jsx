@@ -13,7 +13,7 @@ export default function SipCalculator() {
   const calculateSip = async () => {
     if (!sipAmount || !annualRate || !years) return;
 
-    const response = await fetch("http://127.0.0.1:8000/sip", {
+    const response = await fetch("https://moneymath-your-financial-buddy.onrender.com/sip", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
