@@ -1,0 +1,51 @@
+import { useMemo } from "react";
+import {
+  LineChart,
+  Line,
+  CartesianGrid,
+  XAxis,
+  YAxis,
+  Tooltip,
+  Legend,
+  ResponsiveContainer,
+} from "recharts";
+import { CardContainer, CardBody, CardItem } from "./ui/3d-card";
+
+export default function SipChart({ balances, title = "SIP Growth Over Time" }) {
+  const data = useMemo(() => balances || [], [balances]);
+
+  if (!data || data.length === 0) return null;
+
+  return (
+    <CardContainer containerClassName="py-10">
+      <CardBody className="bg-white/70 rounded-2xl p-6 border border-emerald-200 shadow-sm w-full">
+        <CardItem translateZ={40}>
+          <h3 className="text-2xl font-bold text-emerald-900 mb-4 text-center">
+            {title}
+          </h3>
+        </CardItem>
+        <CardItem translateZ={30} className="w-full h-72">
+          <ResponsiveContainer width="100%" height="100%">
+            <LineChart data={data}>
+              <CartesianGrid strokeDasharray="3 3" stroke="#d1fae5" />
+              <XAxis dataKey="year" />
+              <YAxis />
+              <Tooltip />
+              <Legend />
+              <Line
+                type="monotone"
+                dataKey="balance"
+                stroke="#10b981"
+                strokeWidth={2}
+                dot={false}
+                name="Portfolio value"
+              />
+            </LineChart>
+          </ResponsiveContainer>
+        </CardItem>
+      </CardBody>
+    </CardContainer>
+  );
+}
+
+
