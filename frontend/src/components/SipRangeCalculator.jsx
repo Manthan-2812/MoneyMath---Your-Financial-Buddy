@@ -11,7 +11,7 @@ import {
 } from "recharts";
 import { CardContainer, CardBody, CardItem } from "./ui/3d-card";
 import { formatCurrency } from "@/lib/utils";
-const BASE_URL = import.meta.env.VITE_API_BASE_URL;
+const BASE_URL = "https://moneymath-your-financial-buddy.onrender.com";
 
 export default function SipRangeCalculator() {
   const [sipAmount, setSipAmount] = useState("");

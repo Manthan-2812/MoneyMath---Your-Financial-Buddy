@@ -4,7 +4,7 @@ import { formatCurrency } from "@/lib/utils";
 import AmortTable from "./AmortTable";
 import AmortCharts from "./AmortCharts";
 import AmortSummary from "./AmortSummary";
-const BASE_URL = import.meta.env.VITE_API_BASE_URL;
+const BASE_URL = "https://moneymath-your-financial-buddy.onrender.com";
 
 
 export default function Amortization() {
