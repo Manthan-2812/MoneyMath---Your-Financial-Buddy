@@ -11,6 +11,7 @@ import {
 } from "recharts";
 import { CardContainer, CardBody, CardItem } from "./ui/3d-card";
 import { formatCurrency } from "@/lib/utils";
+const BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
 export default function SipRangeCalculator() {
   const [sipAmount, setSipAmount] = useState("");
@@ -25,7 +26,7 @@ export default function SipRangeCalculator() {
   const calculateRange = async () => {
     if (!sipAmount || !minRate || !maxRate || !years) return;
 
-    const response = await fetch("https://moneymath-your-financial-buddy.onrender.com/sip-range", {
+    const response = await fetch(`${BASE_URL}/sip-range`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({

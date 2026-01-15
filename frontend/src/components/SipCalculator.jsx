@@ -1,6 +1,7 @@
 import { useState } from "react";
 import SipSummary from "./SipSummary";
 import SipChart from "./SipChart";
+const BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
 export default function SipCalculator() {
   const [sipAmount, setSipAmount] = useState("");
@@ -13,7 +14,7 @@ export default function SipCalculator() {
   const calculateSip = async () => {
     if (!sipAmount || !annualRate || !years) return;
 
-    const response = await fetch("https://moneymath-your-financial-buddy.onrender.com/sip", {
+    const response = await fetch(`${BASE_URL}/sip`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({

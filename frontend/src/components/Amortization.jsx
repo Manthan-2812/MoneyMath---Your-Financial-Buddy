@@ -4,6 +4,8 @@ import { formatCurrency } from "@/lib/utils";
 import AmortTable from "./AmortTable";
 import AmortCharts from "./AmortCharts";
 import AmortSummary from "./AmortSummary";
+const BASE_URL = import.meta.env.VITE_API_BASE_URL;
+
 
 export default function Amortization() {
   // ===============================
@@ -22,7 +24,7 @@ export default function Amortization() {
   const calculateAmortization = async () => {
     if (!loanAmount || !interestRate || !tenureYears) return;
 
-    const response = await fetch("https://moneymath-your-financial-buddy.onrender.com/amortization", {
+    const response = await fetch(`${BASE_URL}/amortization`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
