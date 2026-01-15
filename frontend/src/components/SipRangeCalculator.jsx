@@ -10,7 +10,9 @@ import {
   ResponsiveContainer,
 } from "recharts";
 import { CardContainer, CardBody, CardItem } from "./ui/3d-card";
-// Format large numbers to Cr/Lakhs format
+import { formatCurrency } from "@/lib/utils";
+
+// Format large numbers to Cr/Lakhs format for Y-axis
 const formatYAxis = (tick) => {
   if (tick >= 10000000) {
     return `${(tick / 10000000).toFixed(1)} Cr`;
@@ -182,7 +184,7 @@ export default function SipRangeCalculator() {
                     <YAxis 
                 width={80}
                 tickFormatter={formatYAxis}
-                domain={['auto', (dataMax) => Math.ceil(dataMax * 1.1)]}
+                domain={[0, (dataMax) => Math.ceil(dataMax * 1.1)]}
               />
                     <Tooltip />
                     <Legend />
