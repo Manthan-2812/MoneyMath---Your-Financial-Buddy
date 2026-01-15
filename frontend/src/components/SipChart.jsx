@@ -11,6 +11,18 @@ import {
 } from "recharts";
 import { CardContainer, CardBody, CardItem } from "./ui/3d-card";
 
+// Format large numbers to Cr/Lakhs format
+const formatYAxis = (tick) => {
+  if (tick >= 10000000) {
+    return `${(tick / 10000000).toFixed(1)} Cr`;
+  } else if (tick >= 100000) {
+    return `${(tick / 100000).toFixed(1)} L`;
+  } else if (tick >= 1000) {
+    return `${(tick / 1000).toFixed(1)}K`;
+  }
+  return tick;
+};
+
 export default function SipChart({ balances, title = "SIP Growth Over Time" }) {
   const data = useMemo(() => balances || [], [balances]);
 
@@ -29,7 +41,11 @@ export default function SipChart({ balances, title = "SIP Growth Over Time" }) {
             <LineChart data={data}>
               <CartesianGrid strokeDasharray="3 3" stroke="#d1fae5" />
               <XAxis dataKey="year" />
-              <YAxis />
+              <YAxis 
+                width={80}
+                tickFormatter={formatYAxis}
+                domain={[0, (dataMax) => Math.ceil(dataMax * 1.1)]}
+              />
               <Tooltip />
               <Legend />
               <Line

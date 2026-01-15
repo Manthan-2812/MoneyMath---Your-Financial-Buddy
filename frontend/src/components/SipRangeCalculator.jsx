@@ -10,7 +10,17 @@ import {
   ResponsiveContainer,
 } from "recharts";
 import { CardContainer, CardBody, CardItem } from "./ui/3d-card";
-import { formatCurrency } from "@/lib/utils";
+// Format large numbers to Cr/Lakhs format
+const formatYAxis = (tick) => {
+  if (tick >= 10000000) {
+    return `${(tick / 10000000).toFixed(1)} Cr`;
+  } else if (tick >= 100000) {
+    return `${(tick / 100000).toFixed(1)} L`;
+  } else if (tick >= 1000) {
+    return `${(tick / 1000).toFixed(1)}K`;
+  }
+  return tick;
+};
 const BASE_URL = "https://moneymath-your-financial-buddy.onrender.com";
 
 export default function SipRangeCalculator() {
@@ -165,11 +175,15 @@ export default function SipRangeCalculator() {
                 </h3>
               </CardItem>
               <CardItem translateZ={30} className="w-full h-72">
-                <ResponsiveContainer width="100%" height="100%">
+                <ResponsiveContainer width="100%" height={400} className="mt-4">
                   <LineChart data={combinedData}>
                     <CartesianGrid strokeDasharray="3 3" stroke="#d1fae5" />
                     <XAxis dataKey="year" />
-                    <YAxis />
+                    <YAxis 
+                width={80}
+                tickFormatter={formatYAxis}
+                domain={['auto', (dataMax) => Math.ceil(dataMax * 1.1)]}
+              />
                     <Tooltip />
                     <Legend />
                     <Line
