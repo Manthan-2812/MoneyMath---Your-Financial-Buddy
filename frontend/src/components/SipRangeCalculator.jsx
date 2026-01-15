@@ -176,8 +176,9 @@ export default function SipRangeCalculator() {
                   Fixed 12% vs Variable Returns
                 </h3>
               </CardItem>
-              <CardItem translateZ={30} className="w-full h-72">
-                <ResponsiveContainer width="100%" height={400} className="mt-4">
+              <CardItem translateZ={30} className="w-full h-96 overflow-hidden">
+                <div className="w-full h-full">
+                  <ResponsiveContainer width="100%" height="100%" className="-mt-6 -ml-4">
                   <LineChart data={combinedData}>
                     <CartesianGrid strokeDasharray="3 3" stroke="#d1fae5" />
                     <XAxis dataKey="year" />
@@ -205,7 +206,8 @@ export default function SipRangeCalculator() {
                       name="Variable (range)"
                     />
                   </LineChart>
-                </ResponsiveContainer>
+                  </ResponsiveContainer>
+                </div>
               </CardItem>
             </CardBody>
           </CardContainer>

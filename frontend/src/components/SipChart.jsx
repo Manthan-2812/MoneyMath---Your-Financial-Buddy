@@ -11,7 +11,7 @@ import {
 } from "recharts";
 import { CardContainer, CardBody, CardItem } from "./ui/3d-card";
 
-// Format large numbers to Cr/Lakhs format
+// Format large numbers to Cr/Lakhs format for Y-axis
 const formatYAxis = (tick) => {
   if (tick >= 10000000) {
     return `${(tick / 10000000).toFixed(1)} Cr`;
@@ -36,15 +36,16 @@ export default function SipChart({ balances, title = "SIP Growth Over Time" }) {
             {title}
           </h3>
         </CardItem>
-        <CardItem translateZ={30} className="w-full h-72">
-          <ResponsiveContainer width="100%" height="100%">
+        <CardItem translateZ={30} className="w-full h-96 overflow-hidden">
+          <div className="w-full h-full">
+            <ResponsiveContainer width="100%" height="100%" className="-mt-6 -ml-4">
             <LineChart data={data}>
               <CartesianGrid strokeDasharray="3 3" stroke="#d1fae5" />
               <XAxis dataKey="year" />
               <YAxis 
                 width={80}
                 tickFormatter={formatYAxis}
-                domain={[0, (dataMax) => Math.ceil(dataMax * 1.1)]}
+                domain={[0, (dataMax) => Math.max(1, Math.ceil(dataMax * 1.1))]}
               />
               <Tooltip />
               <Legend />
@@ -57,7 +58,8 @@ export default function SipChart({ balances, title = "SIP Growth Over Time" }) {
                 name="Portfolio value"
               />
             </LineChart>
-          </ResponsiveContainer>
+            </ResponsiveContainer>
+          </div>
         </CardItem>
       </CardBody>
     </CardContainer>
