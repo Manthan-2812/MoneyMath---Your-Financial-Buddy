@@ -21,7 +21,7 @@ class LoanInput(BaseModel):
     annual_rate: float
     years: int
 
-
+# This checks to ensure that inputs are in this NUMBER format only 
 class SIPInput(BaseModel):
     sip_amount: float
     annual_rate: float

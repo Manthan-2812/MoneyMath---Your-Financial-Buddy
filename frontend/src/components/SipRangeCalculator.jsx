@@ -187,7 +187,20 @@ export default function SipRangeCalculator() {
                 tickFormatter={formatYAxis}
                 domain={[0, (dataMax) => Math.ceil(dataMax * 1.1)]}
               />
-                    <Tooltip />
+                    <Tooltip 
+                      formatter={(value, name) => {
+                        const num = Number(value);
+                        if (num >= 10000000) {
+                          return [`₹${(num / 10000000).toFixed(2)} Cr`, name];
+                        } else if (num >= 100000) {
+                          return [`₹${(num / 100000).toFixed(2)} L`, name];
+                        } else if (num >= 1000) {
+                          return [`₹${(num / 1000).toFixed(2)}K`, name];
+                        }
+                        return [`₹${num}`, name];
+                      }}
+                      labelFormatter={(label) => `Year ${label}`}
+                    />
                     <Legend />
                     <Line
                       type="monotone"

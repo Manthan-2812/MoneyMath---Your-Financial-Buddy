@@ -47,7 +47,20 @@ export default function SipChart({ balances, title = "SIP Growth Over Time" }) {
                 tickFormatter={formatYAxis}
                 domain={[0, (dataMax) => Math.max(1, Math.ceil(dataMax * 1.1))]}
               />
-              <Tooltip />
+              <Tooltip 
+                formatter={(value) => {
+                  const num = Number(value);
+                  if (num >= 10000000) {
+                    return `₹${(num / 10000000).toFixed(2)} Cr`;
+                  } else if (num >= 100000) {
+                    return `₹${(num / 100000).toFixed(2)} L`;
+                  } else if (num >= 1000) {
+                    return `₹${(num / 1000).toFixed(2)}K`;
+                  }
+                  return `₹${num}`;
+                }}
+                labelFormatter={(label) => `Year ${label}`}
+              />
               <Legend />
               <Line
                 type="monotone"
