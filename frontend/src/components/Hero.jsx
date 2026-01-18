@@ -29,13 +29,13 @@ export default function Hero() {
 
       {/* BIG TITLE */}
       {!showHover ? (
-        <h1 className="text-5xl sm:text-6xl md:text-8xl font-bold text-emerald-900">
+        <h1 className="text-7xl md:text-8xl font-bold text-emerald-900">
           {text}
           <Cursor cursorStyle="" />
         </h1>
       ) : (
-        <div className="h-[7.5rem] sm:h-[9rem] md:h-[10rem] flex items-center justify-center">
-          <TextHoverEffect text="MoneyMath" className="text-5xl sm:text-6xl md:text-8xl" />
+        <div className="h-[10rem] flex items-center justify-center">
+          <TextHoverEffect text="MoneyMath" />
         </div>
       )}
 
