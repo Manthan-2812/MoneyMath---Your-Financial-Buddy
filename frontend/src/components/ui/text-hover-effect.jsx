@@ -5,12 +5,15 @@ import { cn } from "@/lib/utils";
 
 export function TextHoverEffect({ text, className }) {
   return (
-    <div className={cn("relative", className)}>
+    <div className="relative">
       <motion.h1
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 1 }}
-        className="text-8xl md:text-9xl font-bold tracking-tight text-emerald-900"
+        className={cn(
+          "text-8xl md:text-9xl font-bold tracking-tight text-emerald-900",
+          className
+        )}
       >
         {text.split("").map((char, idx) => (
           <motion.span
