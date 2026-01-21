@@ -21,6 +21,8 @@ def calculate_yearly_amortization(principal, annual_rate, years):
         principal_paid = 0
 
         for _ in range(12):
+            if balance <= 0:
+                break
             interest = balance * monthly_rate
             principal_component = emi - interest
             balance -= principal_component
@@ -31,13 +33,15 @@ def calculate_yearly_amortization(principal, annual_rate, years):
         total_interest_all += interest_paid
         total_principal_all += principal_paid
 
+        ending_balance = max(starting_balance - principal_paid, 0)
+
         yearly_table.append({
             "year": year,
             "starting_balance": round(starting_balance, 2),
             "total_principal": round(principal_paid, 2),
             "total_interest": round(interest_paid, 2),
             "yearly_emi": round(emi * 12, 2),
-            "ending_balance": round(balance if balance > 0 else 0, 2),
+            "ending_balance": round(ending_balance, 2),
         })
 
     return {
